@@ -76,12 +76,12 @@ public class Login extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == login) {
-            System.out.println();
+
         } else if (ae.getSource() == clear) {
             cardTextField.setText("");
             pinTextField.setText("");
         } else if (ae.getSource() == signUp) {
-            System.out.println();
+
         }
     }
 
