@@ -1,14 +1,23 @@
+package bank.management.system;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
+import java.util.Random;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.*;
 
-public class SignupOne extends JFrame {
+public class SignupOne extends JFrame implements ActionListener {
+    long random;
+    JTextField nameTextField, fnameTextField, emailTextField, addressTextField, cityTextField, stateTextField, pinTextField;
+    JButton next;
+    JRadioButton male, female, married, unmarried, other;
+    JDateChooser dateChooser;
+
     SignupOne() {
         setLayout(null);
 
         Random rand = new Random();
-        long random = Math.abs((rand.nextLong() % 9000L) + 1000L);
+        random = 1000L + rand.nextInt(9000);
 
         JLabel formno = new JLabel("APPLICATION FORM NO. " + random);
         formno.setFont(new Font("Raleway", Font.BOLD, 38));
@@ -25,7 +34,7 @@ public class SignupOne extends JFrame {
         name.setBounds(100, 140, 100, 30);
         add(name);
 
-        JTextField nameTextField = new JTextField();
+        nameTextField = new JTextField();
         nameTextField.setFont(new Font("Raleway", Font.BOLD, 14));
         nameTextField.setBounds(300, 140, 400, 30);
         add(nameTextField);
@@ -35,7 +44,7 @@ public class SignupOne extends JFrame {
         fname.setBounds(100, 190, 200, 30);
         add(fname);
 
-        JTextField fnameTextField = new JTextField();
+        fnameTextField = new JTextField();
         fnameTextField.setFont(new Font("Raleway", Font.BOLD, 14));
         fnameTextField.setBounds(300, 190, 400, 30);
         add(fnameTextField);
@@ -45,7 +54,7 @@ public class SignupOne extends JFrame {
         dob.setBounds(100, 240, 200, 30);
         add(dob);
 
-        JDateChooser dateChooser = new JDateChooser();
+        dateChooser = new JDateChooser();
         dateChooser.setBounds(300, 240, 400, 30);
         dateChooser.setForeground(Color.RED);
         add(dateChooser);
@@ -55,12 +64,12 @@ public class SignupOne extends JFrame {
         gender.setBounds(100, 290, 200, 30);
         add(gender);
 
-        JRadioButton male = new JRadioButton("Male");
+        male = new JRadioButton("Male");
         male.setBounds(300, 290, 60, 30);
         male.setBackground(Color.WHITE);
         add(male);
 
-        JRadioButton female = new JRadioButton("Female");
+        female = new JRadioButton("Female");
         female.setBounds(450, 290, 120, 30);
         female.setBackground(Color.WHITE);
         add(female);
@@ -74,7 +83,7 @@ public class SignupOne extends JFrame {
         email.setBounds(100, 340, 200, 30);
         add(email);
 
-        JTextField emailTextField = new JTextField();
+        emailTextField = new JTextField();
         emailTextField.setFont(new Font("Raleway", Font.BOLD, 14));
         emailTextField.setBounds(300, 340, 400, 30);
         add(emailTextField);
@@ -84,17 +93,17 @@ public class SignupOne extends JFrame {
         marital.setBounds(100, 390, 200, 30);
         add(marital);
 
-        JRadioButton married = new JRadioButton("Married");
+        married = new JRadioButton("Married");
         married.setBounds(300, 390, 100, 30);
         married.setBackground(Color.WHITE);
         add(married);
 
-        JRadioButton unmarried = new JRadioButton("UnMarried");
+        unmarried = new JRadioButton("Unmarried");
         unmarried.setBounds(450, 390, 100, 30);
         unmarried.setBackground(Color.WHITE);
         add(unmarried);
 
-        JRadioButton other = new JRadioButton("Other");
+        other = new JRadioButton("Other");
         other.setBounds(630, 390, 100, 30);
         other.setBackground(Color.WHITE);
         add(other);
@@ -109,7 +118,7 @@ public class SignupOne extends JFrame {
         address.setBounds(100, 440, 200, 30);
         add(address);
 
-        JTextField addressTextField = new JTextField();
+        addressTextField = new JTextField();
         addressTextField.setFont(new Font("Raleway", Font.BOLD, 14));
         addressTextField.setBounds(300, 440, 400, 30);
         add(addressTextField);
@@ -119,7 +128,7 @@ public class SignupOne extends JFrame {
         city.setBounds(100, 490, 200, 30);
         add(city);
 
-        JTextField cityTextField = new JTextField();
+        cityTextField = new JTextField();
         cityTextField.setFont(new Font("Raleway", Font.BOLD, 14));
         cityTextField.setBounds(300, 490, 400, 30);
         add(cityTextField);
@@ -129,7 +138,7 @@ public class SignupOne extends JFrame {
         state.setBounds(100, 540, 200, 30);
         add(state);
 
-        JTextField stateTextField = new JTextField();
+        stateTextField = new JTextField();
         stateTextField.setFont(new Font("Raleway", Font.BOLD, 14));
         stateTextField.setBounds(300, 540, 400, 30);
         add(stateTextField);
@@ -139,23 +148,64 @@ public class SignupOne extends JFrame {
         pincode.setBounds(100, 590, 200, 30);
         add(pincode);
 
-        JTextField pinTextField = new JTextField();
+        pinTextField = new JTextField();
         pinTextField.setFont(new Font("Raleway", Font.BOLD, 14));
         pinTextField.setBounds(300, 590, 400, 30);
         add(pinTextField);
 
-        JButton next = new JButton("Next");
+        next = new JButton("Next");
         next.setBackground(Color.BLACK);
         next.setForeground(Color.WHITE);
         next.setFont(new Font("Raleway", Font.BOLD, 14));
         next.setBounds(620, 660, 80, 30);
+        next.addActionListener(this);
         add(next);
 
         getContentPane().setBackground(Color.WHITE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setSize(850, 800);
         setLocation(350, 10);
         setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        String formno = String.valueOf(random);
+        String name = nameTextField.getText().trim();
+        String fname = fnameTextField.getText().trim();
+        String email = emailTextField.getText().trim();
+        String dob = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText().trim();
+        String address = addressTextField.getText().trim();
+        String city = cityTextField.getText().trim();
+        String state = stateTextField.getText().trim();
+        String pin = pinTextField.getText().trim();
+
+        String gender = male.isSelected() ? "Male" : (female.isSelected() ? "Female" : null);
+        String marital = married.isSelected() ? "Married" : (unmarried.isSelected() ? "Unmarried" : (other.isSelected() ? "Other" : null));
+
+        try {
+            if (name.isEmpty()) { JOptionPane.showMessageDialog(null, "Name is required"); return; }
+            if (fname.isEmpty()) { JOptionPane.showMessageDialog(null, "Father's name is required"); return; }
+            if (email.isEmpty()) { JOptionPane.showMessageDialog(null, "Email is required"); return; }
+            if (dob.isEmpty()) { JOptionPane.showMessageDialog(null, "Date of Birth is required"); return; }
+            if (address.isEmpty()) { JOptionPane.showMessageDialog(null, "Address is required"); return; }
+            if (city.isEmpty()) { JOptionPane.showMessageDialog(null, "City is required"); return; }
+            if (state.isEmpty()) { JOptionPane.showMessageDialog(null, "State is required"); return; }
+            if (pin.isEmpty()) { JOptionPane.showMessageDialog(null, "Pin code is required"); return; }
+            if (gender == null) { JOptionPane.showMessageDialog(null, "Gender is required"); return; }
+            if (marital == null) { JOptionPane.showMessageDialog(null, "Marital status is required"); return; }
+
+            Conn con = new Conn();
+            String query = "insert into signup(formno, name, fname, dob, gender, email, marital, address, city, pin, state) " +
+                    "values('" + formno + "', '" + name + "', '" + fname + "', '" + dob + "', '" + gender + "', '" + email + "', '" + marital + "', '" + address + "', '" + city + "', '" + pin + "', '" + state + "')";
+            con.st.executeUpdate(query);
+
+            JOptionPane.showMessageDialog(null, "Saved successfully!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Something went wrong: " + e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
